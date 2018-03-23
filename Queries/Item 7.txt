@@ -1,0 +1,6 @@
+INSERT INTO EMPLOYEE(Fname,Minit,Lname,Ssn,Bdate,Address,Sex,Salary,Super_ssn,Dno)VALUES
+('BRETT','A','LEE','999333456',STR_TO_DATE('20-MAY-1988','%d-%b-%Y'),'13SixthSt,Seattle,WA','M',95900,'999999999',5),
+('DALE','B','STEYN','666034555',STR_TO_DATE('23-MAY-1989','%d-%b-%Y'),'19SeventhSt,Seattle,WA','M',96000,'999999999',5),
+('SHOAIB','C','AKHTAR','943852456',STR_TO_DATE('29-MAY-1984','%d-%b-%Y'),'17EightthSt,Seattle,WA','M',95500,'999999999',5);
+
+

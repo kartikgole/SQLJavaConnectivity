@@ -1,0 +1,92 @@
+SQL> @ createemp.sql;
+
+Table created.
+
+SQL> @ createdeploc.sql
+
+Table created.
+
+SQL> @ createdept.sql;
+
+Table created.
+
+SQL> createemp.sql;
+SP2-0734: unknown command beginning "createemp...." - rest of line ignored.
+SQL> @ createemp.sql;
+CREATE TABLE EMPLOYEE
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object 
+
+
+SQL> @ createdepen.sql;
+
+Table created.
+
+SQL> @ createproj.sql;
+
+Table created.
+
+SQL> @ createworkson.sql;
+
+Table created.
+
+SQL> ALTER TABLE EMPLOYEE
+  2  ADD CONSTRAINT fk_superssn
+  3  FOREIGN KEY (Super_ssn) REFERENCES EMPLOYEE(Ssn);
+
+Table altered.
+
+SQL> ALTER TABLE EMPLOYEE
+  2  ADD CONSTRAINT fk_dno
+  3  FOREIGN KEY (Dno) REFERENCES DEPARTMENT(Dnumber);
+
+Table altered.
+
+SQL> ALTER TABLE DEPARTMENT
+  2  ADD CONSTRAINT fk_mgrssn
+  3  FOREIGN KEY (Mgr_ssn) REFERENCES EMPLOYEE(Ssn);
+
+Table altered.
+
+SQL> ALTER TABLE DEPT_LOCATIONS
+  2  ADD CONSTRAINT fk_dno
+  3  FOREIGN KEY (Dnumber) REFERENCES DEPARTMENT (Dnumber);
+ADD CONSTRAINT fk_dno
+               *
+ERROR at line 2:
+ORA-02264: name already used by an existing constraint 
+
+
+SQL> ALTER TABLE DEPT_LOCATIONS
+  2  ADD CONSTRAINT fk_dnumb
+  3  FOREIGN KEY (Dnumber) REFERENCES DEPARTMENT (Dnumber);
+
+Table altered.
+
+SQL> ALTER TABLE PROJECT
+  2  ADD CONSTRAINT fk_dnumber
+  3  FOREIGN KEY (Dnum) REFERENCES DEPARTMENT(Dnumber);
+
+Table altered.
+
+SQL> ALTER TABLE WORKS_ON
+  2  ADD CONSTRAINT fk_essn
+  3  FOREIGN KEY (Essn) REFERENCES EMPLOYEE(Ssn);
+
+Table altered.
+
+SQL> ALTER TABLE WORKS_ON
+  2  ADD CONSTRAINT fk_pno
+  3  FOREIGN KEY(Pno) REFERENCES PROJECT(Pnumber);
+
+Table altered.
+
+SQL> 
+SQL> ALTER TABLE DEPENDENT
+  2  ADD CONSTRAINT fk_essno
+  3  FOREIGN KEY (Essn) REFERENCES EMPLOYEE(Ssn);
+
+Table altered.
+
+SQL> spool off;

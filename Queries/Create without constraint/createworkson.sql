@@ -1,0 +1,4 @@
+CREATE TABLE WORKS_ON
+( Essn CHAR(9),
+Pno INT,
+Hours DECIMAL(3,1));

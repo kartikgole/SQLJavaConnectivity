@@ -1,0 +1,19 @@
+5)
+
+
+INSERT INTO EMPLOYEE (FNAME, LNAME, SSN, DNO) VALUES('Kieron', 'Pollard', '777888123', 82);
+
+As Dno in relation EMPLOYEE is the foreign key referencing to Dnumber of the relation DEPARTMENT, there exists no Dnumber=82 in DEPARTMENT thus referentil integrity constraint is violated.(Foreign key constraint violated)
+
+
+
+
+INSERT INTO EMPLOYEE VALUES('HASHIM','M','AMLA','110110110','22-MAY-1980','14SixthSt,Seattle,WA','M',95000,'999999999',5);INSERT INTO EMPLOYEE VALUES('HASHIM','M','AMLA','110110110',STR_TO_DATE('02-FEB-2013','%d-%b-%Y'),'14SixthSt,Seattle,WA','M',95000,'999999999',5);
+
+Query is rejected as it violates NOT NULL constraint to the attribute SSN(SSN is missing in the insert query).
+
+
+
+
+INSERT INTO EMPLOYEE (FNAME, LNAME, SSN, DNO) VALUES('Kieron', null, '777888123', 82);
+Here Primary key constraint is violated as the Primary key(Ssn) of the EMPLOYEE table accepts Unique and NOT-null values where as the Ssn value trying to be inserted Ssn= '110110110' already exists hence violated integrity constraint.

@@ -1,0 +1,203 @@
+mysql> INSERT INTO DEPARTMENT VALUES('Services', 1, '123456789', STR_TO_DATE('11-AUG-2012','%d-%b-%Y'));
+ERROR 1062 (23000): Duplicate entry '1' for key 'PRIMARY'
+mysql> INSERT INTO DEPARTMENT VALUES('Purchasing', 3, '990110110', STR_TO_DATE('02-FEB-2013','%d-%b-%Y'));
+ERROR 1062 (23000): Duplicate entry '3' for key 'PRIMARY'
+mysql> INSERT INTO DEPARTMENT VALUES('Customers', 12, '333445555', STR_TO_DATE('14-JAN-2013','%d-%b-%Y'));
+Query OK, 1 row affected (0.16 sec)
+
+mysql> UPDATE DEPT_LOCATIONS SET Dnumber = 9 WHERE Dlocation = 'Seattle';
+Query OK, 0 rows affected (0.14 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+mysql> UPDATE EMPLOYEE SET Salary= 55000 WHERE Ssn=444444444;
+Query OK, 0 rows affected (0.09 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+mysql> INSERT INTO EMPLOYEE VALUES('Jane', 'B', 'Smith', '666666606', '01-MAR-1980', '3556 W Second Street,Miami,FL', 'F', 85000, '666666603', 5);
+ERROR 1292 (22007): Incorrect date value: '01-MAR-1980' for column 'Bdate' at row 1
+mysql> INSERT INTO EMPLOYEE VALUES('Jane', 'B', 'Smith', '666666606', STR_TO_DATE('01-MAR-1980','%d-%b-%Y'), '3556 W Second Street,Miami,FL', 'F', 85000, '666666603', 5);
+ERROR 1062 (23000): Duplicate entry '666666606' for key 'PRIMARY'
+mysql> UPDATE WORKS_ON SET hours= 25 WHERE Pno=1 AND Ssn= '666884444';
+ERROR 1054 (42S22): Unknown column 'Ssn' in 'where clause'
+mysql> UPDATE WORKS_ON SET hours= 25 WHERE Pno=1 AND Essn= '666884444';
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+mysql> DELETE FROM EMPLOYEE WHERE Ssn = '432765098';
+Query OK, 1 row affected (0.20 sec)
+
+mysql> DELETE FROM DEPARTMENT WHERE Dnumber = 9;
+ERROR 1451 (23000): Cannot delete or update a parent row: a foreign key constraint fails (`company`.`employee`, CONSTRAINT `fk_dno` FOREIGN KEY (`Dno`) REFERENCES `department` (`Dnumber`))
+mysql> DELETE FROM DEPENDENT WHERE Essn= '666666608';
+Query OK, 3 rows affected (0.09 sec)
+
+mysql> SELECT * FROM EMPLOYEE WHERE Lname ="Jones" OR "James";
++-------+-------+-------+-----------+------------+------------------------+------+----------+-----------+------+
+| Fname | Minit | Lname | Ssn       | Bdate      | Address                | Sex  | Salary   | Super_ssn | Dno  |
++-------+-------+-------+-----------+------------+------------------------+------+----------+-----------+------+
+| Jon   | C     | Jones | 111111101 | 1967-11-14 |  111Allgood,Atlanta,GA | M    | 45000.00 | 111111100 |    6 |
+| Megan | G     | Jones | 254937381 | 1961-03-02 |  528StoneCT,Chicago,IL | F    | 62000.00 | 666666600 |    8 |
++-------+-------+-------+-----------+------------+------------------------+------+----------+-----------+------+
+2 rows in set, 1 warning (0.00 sec)
+
+mysql> SELECT * FROM EMPLOYEE WHERE Fname ="Kim" OR "Wilson";
++-------+-------+-------+-----------+------------+----------------------------+------+----------+-----------+------+
+| Fname | Minit | Lname | Ssn       | Bdate      | Address                    | Sex  | Salary   | Super_ssn | Dno  |
++-------+-------+-------+-----------+------------+----------------------------+------+----------+-----------+------+
+| Kim   | C     | Grace | 333333300 | 1970-10-23 |  667MillsAve,Sacramento,CA | F    | 79000.00 | null      |    6 |
+| Kim   | G     | Ted   | 444222666 | 1968-04-15 |  3648TreeCir,Austin,TX     | M    | 50000.00 | 999999999 |    8 |
++-------+-------+-------+-----------+------------+----------------------------+------+----------+-----------+------+
+2 rows in set, 1 warning (0.00 sec)
+
+mysql> SELECT Fname,Ssn,COUNT(WORKS_ON.Hours) FROM EMPLOYEE,WORKS_ON WHERE (SELECT COUNT(*) FROM WORKS_ON WHERE SSN=ESSN)>1;
++---------+-----------+-----------------------+
+| Fname   | Ssn       | COUNT(WORKS_ON.Hours) |
++---------+-----------+-----------------------+
+| Cameron | 111422203 |                  1470 |
++---------+-----------+-----------------------+
+1 row in set (0.09 sec)
+
+mysql> SELECT Pnumber,Pname,Plocation,count(*) from   PROJECT,WORKS_ON where  Pnumber=Pno group by Pnumber,Pname,Plocation having count(*)>2;
++---------+------------------+------------+----------+
+| Pnumber | Pname            | Plocation  | count(*) |
++---------+------------------+------------+----------+
+|       4 | EntityAnnot      | Houston    |        3 |
+|       5 | Analysis         | Sacramento |        6 |
+|       6 | EventManagement  | Sacramento |        5 |
+|       7 | FoodDistribution | Sacramento |        6 |
+|      10 | Computerization  | Stafford   |        6 |
+|      11 | ConfigMgmt       | Atlanta    |        3 |
+|      20 | Reorganization   | Houston    |        4 |
+|      29 | MotherBoard      | Milwaukee  |        3 |
+|      30 | Benefits         | Stafford   |        4 |
+|      61 | OperatingSystem  | Sacramento |       11 |
+|      62 | DatabaseSystems  | Atlanta    |       11 |
+|      63 | Middleware       | Atlanta    |        9 |
+|      70 | Advertizing      | Arlington  |        4 |
+|      91 | InkjetPrinters   | Milwaukee  |       10 |
+|      92 | LaserPrinters    | Milwaukee  |        5 |
+|      95 | HumanResource    | Arlington  |        4 |
++---------+------------------+------------+----------+
+16 rows in set (0.14 sec)
+
+mysql> SELECT SSN,FNAME, LNAME,PROJECT.Pno,PROJECT.Pname,WORKS_ON.Hours FROM EMPLOYEE WHERE ((SELECT Pno FROM WORKS_ON WHERE  SSN=ESSN)
+    -> CONTAINS (SELECT Pnumber FROM PROJECT WHERE Dnum=5 AND Plocation='Houston'));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'CONTAINS (SELECT Pnumber FROM PROJECT WHERE Dnum=5 AND Plocation='Houston'))' at line 2
+mysql> SELECT SSN,FNAME, LNAME,PROJECT.Pno,PROJECT.Pname,WORKS_ON.Hours FROM EMPLOYEE WHERE ((SELECT Pno FROM WORKS_ON WHERE  SSN=ESSN).
+    -> CONTAINS (SELECT Pnumber FROM PROJECT WHERE Dnum=5 AND Plocation='Houston'));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '.
+CONTAINS (SELECT Pnumber FROM PROJECT WHERE Dnum=5 AND Plocation='Houston'))' at line 1
+mysql> SELECT SSN,FNAME, LNAME,PROJECT.Pno,PROJECT.Pname,WORKS_ON.Hours FROM EMPLOYEE WHERE ((SELECT Pno FROM WORKS_ON WHERE  SSN=ESSN)
+    -> .CONTAINS (SELECT Pnumber FROM PROJECT WHERE Dnum=5 AND Plocation='Houston'));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '.CONTAINS (SELECT Pnumber FROM PROJECT WHERE Dnum=5 AND Plocation='Houston'))' at line 2
+mysql> SELECT Fname, Lname from EMPLOYEE WHERE Ssn in (SELECT Essn   from WORKS_ON  WHERE Hours >= 40);
++---------+----------+
+| Fname   | Lname    |
++---------+----------+
+| Jared   | James    |
+| Jon     | Jones    |
+| Justin  | Mark     |
+| Brad    | Knight   |
+| Cameron | Thirteen |
+| Juan    | Linda    |
+| Evan    | Wallis   |
+| Josh    | Zell     |
+| Andy    | Vile     |
+| Tom     | Brand    |
+| Jenny   | Vos      |
+| Chris   | Carter   |
+| Megan   | Jones    |
+| Kim     | Grace    |
+| Jeff    | Chase    |
+| Jose    | Barbara  |
+| Alex    | Freed    |
+| Bonnie  | Bays     |
+| Alec    | Best     |
+| Sam     | Snedden  |
+| John    | James    |
+| Nandita | Ball     |
+| Andrea  | Sondrini |
+| Jill    | Jarvis   |
+| Lyle    | Leslie   |
+| Billie  | King     |
+| Jon     | Kramer   |
+| Ray     | King     |
+| Gerald  | Small    |
+| Arnold  | Head     |
+| Helga   | Pataki   |
+| Naveen  | Drew     |
+| Carl    | Reedy    |
+| Sammy   | Hall     |
+| Ramesh  | Narayan  |
++---------+----------+
+35 rows in set (0.00 sec)
+
+mysql> SELECT FNAME, LNAME,Count(DISTINCT Super_ssn) FROM EMPLOYEE WHERE Super_ssn =(SELECT SSN FROM EMPLOYEE );
+ERROR 1242 (21000): Subquery returns more than 1 row
+mysql> SELECT FNAME, LNAME,Count(DISTINCT Super_ssn) FROM EMPLOYEE WHERE Super_ssn =(SELECT Ssn FROM EMPLOYEE );
+ERROR 1242 (21000): Subquery returns more than 1 row
+mysql> SELECT FNAME, LNAME,Count(DISTINCT Super_ssn) FROM EMPLOYEE WHERE Super_ssn in (SELECT Ssn FROM EMPLOYEE);
++-------+-------+---------------------------+
+| FNAME | LNAME | Count(DISTINCT Super_ssn) |
++-------+-------+---------------------------+
+| Alex  | Yu    |                        26 |
++-------+-------+---------------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT Pname, SUM (Hours) FROM PROJECT, WORKS_ON WHERE PNUMBER=PNO;
+ERROR 1630 (42000): FUNCTION company.SUM does not exist. Check the 'Function Name Parsing and Resolution' section in the Reference Manual
+mysql> SELECT Pname, SUM(Hours) FROM PROJECT, WORKS_ON WHERE PNUMBER=PNO;
++----------+------------+
+| Pname    | SUM(Hours) |
++----------+------------+
+| Analysis |     2265.0 |
++----------+------------+
+1 row in set (0.01 sec)
+
+mysql> SELECT Lname,Fname from   EMPLOYEE where  (select count(*) from DEPENDENT where Ssn=Essn) >=2;
++--------+--------+
+| Lname  | Fname  |
++--------+--------+
+| Vile   | Andy   |
+| Vos    | Jenny  |
+| Bays   | Bonnie |
+| Jabbar | Ahmad  |
++--------+--------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT Lname,Fname from   EMPLOYEE where  (select count(*) from DEPENDENT where Ssn=Essn AND DEPENEDENT.RELATIONSHIP = 'Children' ) >=1;
+ERROR 1054 (42S22): Unknown column 'DEPENEDENT.RELATIONSHIP' in 'where clause'
+mysql> SELECT Lname,Fname from   EMPLOYEE where  (select count(*) from DEPENDENT where Ssn=Essn AND DEPENDENT.RELATIONSHIP = 'Children' ) >=1;
++--------+--------+
+| Lname  | Fname  |
++--------+--------+
+| Vile   | Andy   |
+| Vos    | Jenny  |
+| Bays   | Bonnie |
+| Jabbar | Ahmad  |
++--------+--------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT Fname,Lname from EMPLOYEE WHERE Dno IN (SELECT DNUMBER FROM DEPT_LOACTIONS WHERE Dlocation = 'Atlanta');
+ERROR 1146 (42S02): Table 'company.dept_loactions' doesn't exist
+mysql> 	
+Empty set (0.00 sec)
+
+mysql> SELECT DEPARTMENT.DNAME,COUNT(PROJECT.Pnumber)
+    -> FROM   DEPARTMENT, DEPT_LOCATIONS,PROJECT
+    -> WHERE  DEPARTMENT.DNUMBER = DEPT_LOCATIONS.DNUMBER
+    -> AND    DLOCATION = 'HOUSTON' AND PROJECT.Dnum = DEPARTMENT.DNUMBER;
++-------+------------------------+
+| DNAME | COUNT(PROJECT.Pnumber) |
++-------+------------------------+
+| NULL  |                      0 |
++-------+------------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT SSN,FNAME, LNAME,PROJECT.Pno,PROJECT.Pname,WORKS_ON.Hours FROM EMPLOYEE WHERE ((SELECT Pno FROM WORKS_ON WHERE  SSN=ESSN)
+    -> IN (SELECT Pnumber FROM PROJECT WHERE Dnum=5 AND Plocation='Houston'));
+ERROR 1054 (42S22): Unknown column 'PROJECT.Pno' in 'field list'
+mysql> SELECT SSN,FNAME, LNAME,PROJECT.Pno,PROJECT.Pname,WORKS_ON.Hours FROM EMPLOYEE, PROJECT, WORKS_ON WHERE ((SELECT Pno FROM WORKS_ON WHERE  SSN=ESSN)
+    -> IN (SELECT Pnumber FROM PROJECT WHERE Dnum=5 AND Plocation='Houston'));
+ERROR 1054 (42S22): Unknown column 'PROJECT.Pno' in 'field list'
+mysql> notee

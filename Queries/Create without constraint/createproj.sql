@@ -1,0 +1,5 @@
+CREATE TABLE PROJECT
+( Pname VARCHAR(25),
+Pnumber INT(5),
+Plocation VARCHAR(25),
+Dnum INT(5));

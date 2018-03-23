@@ -1,0 +1,87 @@
+mysql> INSERT INTO EMPLOYEE(Fname,Minit,Lname,Ssn,Bdate,Address,Sex,Salary,Super_ssn,Dno)VALUES
+    -> ('BRETT','A','LEE','999333456',STR_TO_DATE('20-MAY-1988','%d-%b-%Y'),'13SixthSt,Seattle,WA','M',95900,'999999999',5),
+    -> ('DALE','B','STEYN','666034555',STR_TO_DATE('23-MAY-1989','%d-%b-%Y'),'19SeventhSt,Seattle,WA','M',96000,'999999999',5),
+    -> ('SHOAIB','C','AKHTAR','943852456',STR_TO_DATE('29-MAY-1984','%d-%b-%Y'),'17EightthSt,Seattle,WA','M',95500,'999999999',5);
+Query OK, 3 rows affected (0.08 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from employee;
++-----------+-------+-----------+-----------+------------+-------------------------------+------+----------+-----------+------+
+| Fname     | Minit | Lname     | Ssn       | Bdate      | Address                       | Sex  | Salary   | Super_ssn | Dno  |
++-----------+-------+-----------+-----------+------------+-------------------------------+------+----------+-----------+------+
+| Alex      | C     | Yu        | 001614905 | 1980-10-17 |  626MarySt,Dallas,TX          | M    | 50000.00 | 444444400 |    6 |
+| Lisa      | G     | House     | 101248268 | 1975-06-29 |  12MapleSt,Austin,TX          | F    | 85000.00 | null      |    7 |
+| Sunil     | D     | Gupta     | 110110110 | 2001-02-01 |  4312BowenRd,Arlington,TX     | M    | 80000.00 | 111111100 |    3 |
+| Jared     | D     | James     | 111111100 | 1966-10-10 |  123Peachtr,Atlanta,GA        | M    | 85000.00 | null      |    6 |
+| Jon       | C     | Jones     | 111111101 | 1967-11-14 |  111Allgood,Atlanta,GA        | M    | 45000.00 | 111111100 |    6 |
+| Justin    | null  | Mark      | 111111102 | 1966-01-12 |  2342May,Atlanta,GA           | M    | 40000.00 | 111111100 |    6 |
+| Brad      | C     | Knight    | 111111103 | 1968-02-13 |  176MainSt.,Atlanta,GA        | M    | 44000.00 | 111111100 |    6 |
+| Cameron   | D     | Thirteen  | 111422203 | 2001-05-04 |  22UnivBlvd,Arlington,TX      | F    | 80000.00 | 987987987 |    4 |
+| Juan      | G     | Linda     | 112244668 | 1965-06-23 |  1210AppleSt,Austin,TX        | F    | 55000.00 | null      |    9 |
+| John      | B     | Smith     | 123456789 | 1955-01-09 |  731Fondren,Houston,TX        | M    | 30000.00 | 333445555 |    5 |
+| Debra     | T     | Hall      | 202843824 | 1983-03-11 |  45NYSt,Rochester,NY          | F    | 30000.00 | 555555501 |    6 |
+| Richard   | T     | Koelbel   | 214370999 | 1976-04-03 |  50ElkSt,Chicago,IL           | M    | 85000.00 | 999999999 |    4 |
+| Evan      | E     | Wallis    | 222222200 | 1958-01-16 |  134Pelham,Milwaukee,WI       | M    | 92000.00 | null      |    7 |
+| Josh      | U     | Zell      | 222222201 | 1954-05-22 |  266McGrady,Milwaukee,WI      | M    | 56000.00 | 222222200 |    7 |
+| Andy      | C     | Vile      | 222222202 | 1944-06-21 |  1967Jordan,Milwaukee,WI      | M    | 53000.00 | 222222200 |    7 |
+| Tom       | G     | Brand     | 222222203 | 1966-12-16 |  112ThirdSt,Milwaukee,WI      | M    | 62500.00 | 222222200 |    7 |
+| Jenny     | F     | Vos       | 222222204 | 1967-11-11 |  263Mayberry,Milwaukee,WI     | F    | 61000.00 | 222222201 |    7 |
+| Chris     | A     | Carter    | 222222205 | 1960-03-21 |  565Jordan,Milwaukee,WI       | F    | 43000.00 | 222222201 |    7 |
+| John      | T     | Ed        | 222333444 | 1981-02-18 |  4505WestSt,Rochester,NY      | M    | 30000.00 | 555555501 |    6 |
+| Jennifer  | A     | Joy       | 223344667 | 1976-05-19 |  1204MainSt,Miami,FL          | F    | 45000.00 | 666666613 |    8 |
+| willie    | D     | Mary      | 234234234 | 1961-12-20 |  101SouthSt,Arlington,TX      | F    | 12000.00 | 112244668 |    9 |
+| Christina | S     | Hisel     | 241625699 | 1986-07-05 |  37ChurchRow,Rochester,NY     | F    | 45000.00 | 123456789 |    6 |
+| Erin      | A     | Maxfield  | 242535609 | 1971-12-22 |  123CopperSt,Arlington,TX     | F    | 72000.00 | 555555500 |    8 |
+| Wilson    | A     | Holmes    | 242916639 | 1971-06-02 |  21SouthCo,Arlington,TX       | M    | 72500.00 | 555555500 |    4 |
+| Jake      | D     | Sheen     | 245239264 | 1954-12-25 |  20NorthCo,Arlington,TX       | M    | 52000.00 | 112244668 |    6 |
+| Megan     | G     | Jones     | 254937381 | 1961-03-02 |  528StoneCT,Chicago,IL        | F    | 62000.00 | 666666600 |    8 |
+| Jisha     | A     | Carpenter | 292740167 | 1985-05-29 |  194Beachdr,Miami,FL          | F    | 15000.00 | 666666613 |    1 |
+| Kim       | C     | Grace     | 333333300 | 1970-10-23 |  667MillsAve,Sacramento,CA    | F    | 79000.00 | null      |    6 |
+| Jeff      | H     | Chase     | 333333301 | 1970-01-07 |  15Bradbury,Sacramento,CA     | M    | 44000.00 | 333333300 |    6 |
+| Frank     | T     | Wong      | 333445555 | 1945-12-08 |  638Voss,Houston,TX           | M    | 40000.00 | 888665555 |    5 |
+| Jose      | H     | Barbara   | 343434344 | 1955-02-28 |  905EastSt,Kleen,TX           | F    | 35000.00 | 444444400 |    6 |
+| Leonard   | H     | Moody     | 349273344 | 1973-02-09 |  908GreekRow,Austin,TX        | M    | 45000.00 | 444444400 |    7 |
+| Percy     | M     | Liang     | 398172999 | 1991-06-12 |  14MapleSt,Austin,TX          | M    | 55000.00 | null      |    9 |
+| Gregory   | G     | Laurie    | 444212096 | 1969-09-15 |  78TreeCir,Houston,TX         | M    | 90000.00 | 444444400 |    7 |
+| Kim       | G     | Ted       | 444222666 | 1968-04-15 |  3648TreeCir,Austin,TX        | M    | 50000.00 | 999999999 |    8 |
+| Alex      | D     | Freed     | 444444400 | 1950-10-09 |  4333Pillsbury,Milwaukee,WI   | M    | 89000.00 | null      |    7 |
+| Bonnie    | S     | Bays      | 444444401 | 1956-06-19 |  111Hollow,Milwaukee,WI       | F    | 70000.00 | 444444400 |    7 |
+| Alec      | C     | Best      | 444444402 | 1966-06-18 |  233Solid,Milwaukee,WI        | M    | 60000.00 | 444444400 |    7 |
+| Sam       | S     | Snedden   | 444444403 | 1977-07-31 |  97WindySt,Milwaukee,WI       | M    | 48000.00 | 444444400 |    7 |
+| Joyce     | A     | English   | 453453453 | 1962-07-31 |  5631RiceOak,Houston,TX       | F    | 25000.00 | 333445555 |    5 |
+| John      | C     | James     | 555555500 | 1975-06-30 |  766Bloomington,Sacramento,CA | M    | 81000.00 | null      |    8 |
+| Nandita   | K     | Ball      | 555555501 | 1969-04-16 |  222Howard,Sacramento,CA      | M    | 62000.00 | 555555500 |    6 |
+| Andrea    | M     | Sondrini  | 614370310 | 1996-12-30 |  1450WorthingtonSt,Houston,TX | F    | 65000.00 | 444444401 |    5 |
+| Michael   | A     | Morgan    | 636669233 | 1984-05-11 |  26SunsetBlvd,Miami,FL        | M    | 73500.00 | 666666612 |    5 |
+| DALE      | B     | STEYN     | 666034555 | 1989-05-23 | 19SeventhSt,Seattle,WA        | M    | 96000.00 | 999999999 |    5 |
+| Bob       | B     | Bender    | 666666600 | 1968-04-17 |  8794Garfield,Chicago,IL      | M    | 96000.00 | null      |    8 |
+| Jill      | J     | Jarvis    | 666666601 | 1966-01-14 |  6234Lincoln,Chicago,IL       | F    | 36000.00 | 666666600 |    8 |
+| Kate      | W     | King      | 666666602 | 1966-04-16 |  1976BooneTrace,Chicago,IL    | F    | 44000.00 | 666666600 |    8 |
+| Lyle      | G     | Leslie    | 666666603 | 1963-06-09 |  417HancockAve,Chicago,IL     | M    | 41000.00 | 666666601 |    8 |
+| Billie    | J     | King      | 666666604 | 1960-01-01 |  556Washington,Chicago,IL     | F    | 38000.00 | 666666603 |    8 |
+| Jon       | A     | Kramer    | 666666605 | 1964-08-22 |  1988WindyCreek,Seattle,WA    | M    | 41500.00 | 666666603 |    8 |
+| Ray       | H     | King      | 666666606 | 1949-08-16 |  213DelkRoad,Seattle,WA       | M    | 44500.00 | 666666604 |    8 |
+| Gerald    | D     | Small     | 666666607 | 1962-05-15 |  122BallStreet,Dallas,TX      | M    | 29000.00 | 666666602 |    8 |
+| Arnold    | A     | Head      | 666666608 | 1967-05-19 |  233SpringSt,Dallas,TX        | M    | 33000.00 | 666666602 |    8 |
+| Helga     | C     | Pataki    | 666666609 | 1969-03-11 |  101HolyokeSt,Dallas,TX       | F    | 32000.00 | 666666602 |    8 |
+| Naveen    | B     | Drew      | 666666610 | 1970-05-23 |  198ElmSt,Philadelphia,PA     | M    | 34000.00 | 666666607 |    8 |
+| Carl      | E     | Reedy     | 666666611 | 1977-06-21 |  213BallSt,Philadelphia,PA    | M    | 32000.00 | 666666610 |    8 |
+| Sammy     | G     | Hall      | 666666612 | 1970-01-11 |  433MainStreet,Miami,FL       | M    | 37000.00 | 666666611 |    8 |
+| Red       | A     | Bacher    | 666666613 | 1980-05-21 |  196ElmStreet,Miami,FL        | M    | 33500.00 | 666666612 |    8 |
+| Ramesh    | K     | Narayan   | 666884444 | 1952-09-15 |  971FireOak,Humble,TX         | M    | 38000.00 | 333445555 |    5 |
+| Penny     | G     | Wolowitz  | 673466642 | 1974-01-21 |  42SouthBlvd,Miami,FL         | F    | 17000.00 | 222333444 |    6 |
+| Sheldon   | C     | Cucuou    | 849934919 | 1974-03-22 |  11HollywoodBlvd,Dallas,TX    | M    | 35500.00 | 888665555 |    8 |
+| James     | E     | Jordan    | 888665151 | 1927-11-10 |  450Stone,Houston,TX          | M    | 55000.00 | null      |    1 |
+| James     | U     | Miller    | 906218888 | 1978-05-27 |  13FifthSt,Seattle,WA         | M    | 75000.00 | 999999999 |    5 |
+| Joseph    | K     | Kirkish   | 913323708 | 1996-03-04 |  22UTBlvd,Austin,TX           | M    | 95000.00 | null      |    7 |
+| Zach      | A     | Geller    | 913353347 | 1990-08-15 |  333PikeWay,Seattle,WA        | M    | 55000.00 | 444444403 |    6 |
+| SHOAIB    | C     | AKHTAR    | 943852456 | 1984-05-29 | 17EightthSt,Seattle,WA        | M    | 95500.00 | 999999999 |    5 |
+| Jennifer  | S     | Wallace   | 987654321 | 1931-06-20 |  291Berry,Bellaire,TX         | F    | 43000.00 | 888665555 |    4 |
+| Ahmad     | V     | Jabbar    | 987987987 | 1959-03-29 |  980Dallas,Houston,TX         | M    | 25000.00 | 987654321 |    4 |
+| BRETT     | A     | LEE       | 999333456 | 1988-05-20 | 13SixthSt,Seattle,WA          | M    | 95900.00 | 999999999 |    5 |
+| Alicia    | J     | Zelaya    | 999887777 | 1958-07-19 |  3321Castle,Spring,TX         | F    | 25000.00 | 987654321 |    4 |
+| Roy       | C     | Lewallen  | 999999999 | 1977-03-02 |  14WynncrestStreet,Dallas,TX  | M    | 75500.00 | 666666600 |    8 |
++-----------+-------+-----------+-----------+------------+-------------------------------+------+----------+-----------+------+
+72 rows in set (0.00 sec)
+
+mysql> notee

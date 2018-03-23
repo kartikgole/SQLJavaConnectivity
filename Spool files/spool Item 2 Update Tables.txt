@@ -1,0 +1,74 @@
+mysql> show tables;
++-------------------+
+| Tables_in_company |
++-------------------+
+| department        |
+| dependent         |
+| dept_locations    |
+| employee          |
+| project           |
+| works_on          |
++-------------------+
+6 rows in set (0.00 sec)
+
+mysql> alter table department
+    -> add constraint fk_mgrssn
+    -> foreign key (Mgr_ssn) references department(Dnumber);
+ERROR 1215 (HY000): Cannot add foreign key constraint
+mysql> alter table department
+    -> add constraint fk_mgrssn
+    -> foreign key (Mgr_ssn) references Employee(Ssn);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`company`.`#sql-9ec_9e`, CONSTRAINT `fk_mgrssn` FOREIGN KEY (`Mgr_ssn`) REFERENCES `employee` (`Ssn`))
+mysql> alter table employee
+    -> add constraint fk_superssn
+    -> foreign key (Super_ssn) references Employee(Ssn);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`company`.`#sql-9ec_9e`, CONSTRAINT `fk_superssn` FOREIGN KEY (`Super_ssn`) REFERENCES `employee` (`Ssn`))
+mysql> alter table employee
+    -> add constraint fk_dno
+    -> foreign key (Dno) references department(Dnumber);
+Query OK, 70 rows affected (0.71 sec)
+Records: 70  Duplicates: 0  Warnings: 0
+
+mysql> alter table employee
+    -> add constraint fk_superssn
+    -> foreign key (Super_ssn) references employee(Ssn);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`company`.`#sql-9ec_9e`, CONSTRAINT `fk_superssn` FOREIGN KEY (`Super_ssn`) REFERENCES `employee` (`Ssn`))
+mysql> alter table department
+    -> add constraint fk_mgrssn
+    -> foreign key (Mgr_ssn) references employee(Ssn);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`company`.`#sql-9ec_9e`, CONSTRAINT `fk_mgrssn` FOREIGN KEY (`Mgr_ssn`) REFERENCES `employee` (`Ssn`))
+mysql> alter table dept_locations
+    -> add constraint fk_dnumber
+    -> foreign key (Dnumber) references department(Dnumber);
+Query OK, 15 rows affected (0.69 sec)
+Records: 15  Duplicates: 0  Warnings: 0
+
+mysql> alter table project
+    -> add constraint fk_dnumb
+    -> foreign key (Dnum) references department(Dnumber);
+Query OK, 18 rows affected (0.84 sec)
+Records: 18  Duplicates: 0  Warnings: 0
+
+mysql> alter table works_on
+    -> add constraint fk_essn
+    -> foreign key (Essn) references employee(Ssn);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`company`.`#sql-9ec_9e`, CONSTRAINT `fk_essn` FOREIGN KEY (`Essn`) REFERENCES `employee` (`Ssn`))
+mysql> alter table works_on
+    -> add constraint fk_pno
+    -> foreign key (Pno) references project(Pnumber);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`company`.`#sql-9ec_9e`, CONSTRAINT `fk_pno` FOREIGN KEY (`Pno`) REFERENCES `project` (`Pnumber`))
+mysql> alter table dependent
+    -> add constraint fk_essn
+    -> foreign key (Essn) references employee(Ssn);
+Query OK, 22 rows affected (0.69 sec)
+Records: 22  Duplicates: 0  Warnings: 0
+
+mysql> alter table employee
+    -> add constraint fk_superssn
+    -> foreign key (Super_ssn) references employee(Ssn);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`company`.`#sql-9ec_9e`, CONSTRAINT `fk_superssn` FOREIGN KEY (`Super_ssn`) REFERENCES `employee` (`Ssn`))
+mysql> alter table works_on
+    -> add constraint fk_essno
+    -> foreign key (Essn) references employee(Ssn);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`company`.`#sql-9ec_9e`, CONSTRAINT `fk_essno` FOREIGN KEY (`Essn`) REFERENCES `employee` (`Ssn`))
+mysql> notee

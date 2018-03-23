@@ -1,0 +1,12 @@
+DB 1 Project 1
+
+By
+Karteek P Gole (1001553522)
+Amitesh Mathur (1001563299)
+
+1. DB1Connectivity folder refers to the java program for populating the tables.
+2. Spool files folder contains the recorded spool files with output.
+3. Queries folder contains all SQL Queries required to be executed in Items 1,2,3,4,5,6,7.
+
+
+PS: MySQL corresponding to local system used. The project has no omega connectivity.

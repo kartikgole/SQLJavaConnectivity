@@ -1,0 +1,10 @@
+﻿mysql> INSERT INTO EMPLOYEE (FNAME, LNAME, SSN, DNO) VALUES('Kieron', 'Pollard', '777888123', 82);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`company`.`employee`, CONSTRAINT `fk_dno` FOREIGN KEY (`Dno`) REFERENCES `department` (`Dnumber`))
+
+mysql> INSERT INTO EMPLOYEE VALUES('HASHIM','M','AMLA','110110110','22-MAY-1980','14SixthSt,Seattle,WA','M',95000,'999999999',5);INSERT INTO EMPLOYEE VALUES('HASHIM','M','AMLA','110110110',STR_TO_DATE('02-FEB-2013','%d-%b-%Y'),'14SixthSt,Seattle,WA','M',95000,'999999999',5);
+ERROR 1292 (22007): Incorrect date value: '22-MAY-1980' for column 'Bdate' at row 1
+ERROR 1062 (23000): Duplicate entry '110110110' for key 'PRIMARY'
+
+mysql> INSERT INTO EMPLOYEE (FNAME, LNAME, SSN, DNO) VALUES('Kieron', null, '777888123', 82);
+ERROR 1048 (23000): Column 'Lname' cannot be null
+mysql> notee

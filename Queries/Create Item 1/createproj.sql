@@ -1,0 +1,7 @@
+CREATE TABLE PROJECT
+( Pname VARCHAR(25) NOT NULL,
+Pnumber INT NOT NULL,
+Plocation VARCHAR(15),
+Dnum INT NOT NULL,
+PRIMARY KEY (Pnumber),
+UNIQUE (Pname));
